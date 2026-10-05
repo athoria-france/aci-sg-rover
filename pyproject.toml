@@ -1,7 +1,7 @@
 [project]
 name = "sg-rover"
 version = "0.1.0"
-description = "Program that controls some rovers and allows them to move sequentially on a grid."
+description = "Explores a Mission: lands Rovers on a Plateau, then moves them one after the other."
 readme = "README.md"
 authors = [
     { name = "Alex CINQ", email = "acinq@athoria.fr" }
@@ -73,3 +73,4 @@ source = ["src"]
 [tool.coverage.report]
 fail_under = 80
 show_missing = true
+exclude_also = ["assert_never\\("]
