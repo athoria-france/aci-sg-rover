@@ -1,0 +1,75 @@
+[project]
+name = "sg-rover"
+version = "0.1.0"
+description = "Program that controls some rovers and allows them to move sequentially on a grid."
+readme = "README.md"
+authors = [
+    { name = "Alex CINQ", email = "acinq@athoria.fr" }
+]
+requires-python = ">=3.14,<3.15"
+dependencies = []
+
+[build-system]
+requires = ["uv_build>=0.12.23,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.uv]
+required-version = ">=0.12.23,<0.13"
+
+[tool.uv.build-backend]
+module-root = ""
+module-name = "src"
+
+[dependency-groups]
+dev = [
+    "bandit>=1.9.4",
+    "mypy>=2.4.0",
+    "pip-audit>=2.10.1",
+    "pytest>=9.1.1",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.16.10",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py314"
+src = [".", "tests"]
+
+[tool.ruff.format]
+line-ending = "lf"
+
+[tool.ruff.lint]
+select = [
+    "E", "W", # pycodestyle
+    "F", # pyflakes
+    "I", # isort
+    "B", # flake8-bugbear
+    "UP", # pyupgrade
+    "N", # pep8-naming
+    "SIM", # flake8-simplify
+    "C4", # flake8-comprehensions
+    "RUF", # ruff-specific
+]
+
+[tool.mypy]
+python_version = "3.14"
+strict = true
+files = ["rover.py", "src", "tests"]
+warn_unreachable = true
+pretty = true
+
+[tool.bandit]
+exclude_dirs = ["tests", ".venv"]
+
+[tool.pytest.ini_options]
+minversion = "9.0"
+testpaths = ["tests"]
+addopts = ["-ra", "--import-mode=importlib", "--strict-markers", "--strict-config", "--cov=src", "--cov-report=term-missing"]
+
+[tool.coverage.run]
+branch = true
+source = ["src"]
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true
